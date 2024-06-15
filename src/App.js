@@ -10,22 +10,19 @@ function App() {
   const API_URL = "https://itunes.apple.com/search?term=";
 
   useEffect(() => {
-    // This is the first function that runs when the component loads.
-    if (search === "") {
-      // If the search term is empty, set the message to 'Search for Music!'.
-      const fetchData = async () => {
-        document.title = `${search} Music`;
-        const response = await fetch("API_URL + search");
-        const resData = await response.json();
-        if (resData.results.length > 0) {
-          setData(resData.results);
+    const fetchData = async () => { // This function runs when the component loads.
+        document.title = `${search} Music`
+        const response = await fetch('https://itunes.apple.com/search?term=the%20grateful%20dead')
+        const resData = await response.json()
+        if (resData.results.length > 0) { // If the search term returns results, then...
+            setData(resData.results)
         } else {
-          setData("Not Found");
+            setMessage('Not Found')
         }
-      };
-      fetchData();
     }
-  }, [search]);
+    fetchData()
+}, [search])
+
 
   const handleSearch = (e, term) => {
     // This function runs when the user submits the search form.
